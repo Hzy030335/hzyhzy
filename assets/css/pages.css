@@ -1,0 +1,632 @@
+/* =============================================================
+   子页面专属样式（经历 / 技能 / 证书 / 联系）
+   依赖：style.css
+   ============================================================= */
+
+/* =========================================================
+   一、经历页 —— 时间轴
+   ========================================================= */
+
+/* 分类筛选按钮 */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 44px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  font-size: 13.5px;
+  font-weight: 700;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all .25s var(--ease);
+}
+
+.filter-btn:hover { border-color: var(--steel); color: var(--text); }
+
+.filter-btn.active {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #0b0d10;
+}
+
+/* 时间轴容器 */
+.timeline { position: relative; padding-left: 44px; }
+
+/* 竖向主轴（带渐变，像工业管道） */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 11px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--amber), var(--cyan) 45%, var(--line));
+}
+
+/* 单个时间节点 */
+.tl-item {
+  position: relative;
+  margin-bottom: 34px;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+/* 筛选时被隐藏的项 */
+.tl-item.hide { display: none; }
+
+/* 轴上的圆形节点（机械轴承样式）
+   left 取值 = 轴线中心 - 时间轴左内边距 - 节点半径，保证节点正落在轴线上 */
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: -40px; top: 22px;
+  width: 16px; height: 16px;
+  background: var(--bg);
+  border: 3px solid var(--amber);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all .3s var(--ease);
+}
+
+.tl-item:hover::before {
+  background: var(--amber);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--amber) 20%, transparent);
+}
+
+/* 节点卡片头部 */
+.tl-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.tl-head h3 {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.2px;
+}
+
+.tl-org { font-size: 13px; color: var(--cyan); font-weight: 700; }
+
+.tl-date {
+  margin-left: auto;
+  padding: 3px 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-family: "Consolas", monospace;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tl-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  background: color-mix(in srgb, var(--amber) 16%, transparent);
+  border-left: 3px solid var(--amber);
+  color: var(--amber);
+  margin-bottom: 14px;
+}
+
+/* 成果要点列表 */
+.tl-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 9px;
+  font-size: 14.8px;
+  color: var(--text-2);
+  line-height: 1.72;
+}
+
+.tl-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 11px;
+  width: 8px; height: 2px;
+  background: var(--cyan);
+}
+
+/* 关键数据条 */
+.tl-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 18px;
+}
+
+.tl-metric {
+  flex: 1 1 140px;
+  background: var(--panel-2);
+  padding: 12px 14px;
+}
+
+.tl-metric b {
+  display: block;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--amber);
+  font-family: "Consolas", monospace;
+  line-height: 1.2;
+}
+
+.tl-metric span { font-size: 12px; color: var(--muted); }
+
+/* 无匹配结果提示 */
+.no-result {
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  font-size: 14px;
+}
+
+/* =========================================================
+   二、技能页 —— 雷达图
+   ========================================================= */
+.skills-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* 雷达图容器 */
+.radar-box {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 24px;
+  clip-path: polygon(0 0, 100% 0, 100% 94%, 94% 100%, 0 100%);
+}
+
+.radar-box::before {
+  content: "SKILL RADAR // 能力雷达";
+  position: absolute;
+  top: 14px; left: 18px;
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  font-family: "Consolas", monospace;
+}
+
+#radar { width: 100%; height: auto; display: block; }
+
+/* 雷达图各元素的样式（由 JS 生成，这里定义外观） */
+.radar-web { fill: none; stroke: var(--line); stroke-width: 1; }
+.radar-axis { stroke: var(--line); stroke-width: 1; }
+.radar-area {
+  fill: color-mix(in srgb, var(--amber) 26%, transparent);
+  stroke: var(--amber);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: all .6s var(--ease);
+}
+.radar-point { fill: var(--amber); stroke: var(--bg); stroke-width: 2; }
+.radar-label { fill: var(--text-2); font-size: 12px; font-weight: 700; }
+.radar-value { fill: var(--muted); font-size: 10.5px; font-family: "Consolas", monospace; }
+
+/* 技能说明列表 */
+.skill-item { margin-bottom: 22px; }
+
+.skill-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 7px;
+}
+
+.skill-top b { font-size: 15px; font-weight: 800; }
+
+.skill-top span {
+  font-size: 13px;
+  font-family: "Consolas", monospace;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+/* 进度轨道（机械刻度感） */
+.skill-track {
+  height: 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  width: 0;
+  background: repeating-linear-gradient(90deg,
+    var(--amber) 0 12px,
+    color-mix(in srgb, var(--amber) 72%, #000) 12px 14px);
+  transition: width 1.2s var(--ease);
+}
+
+.skill-desc { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+/* 工具箱标签云 */
+.tool-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.tool {
+  padding: 7px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text-2);
+  transition: all .25s var(--ease);
+}
+
+.tool:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   三、证书页 —— 3D 翻转卡片
+   正面：证书原图 + 标题
+   背面：这张证书的来历、关键数据与收获
+   ========================================================= */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+/* --- 卡片本体：3D 舞台 --- */
+.flip-card {
+  position: relative;
+  height: 430px;
+  perspective: 1600px;      /* 透视深度：值越大，翻转越"平" */
+  cursor: pointer;
+  outline: none;
+}
+
+/* 正反两面的共同样式 */
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;      /* 背对屏幕时隐藏，避免看到镜像内容 */
+  -webkit-backface-visibility: hidden;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform .72s var(--ease), border-color .3s var(--ease);
+  will-change: transform;
+}
+
+.flip-front { transform: rotateY(0deg); }
+.flip-back { transform: rotateY(180deg); }
+
+/* 翻转状态 */
+.flip-card.flipped .flip-front { transform: rotateY(-180deg); }
+.flip-card.flipped .flip-back { transform: rotateY(180deg); }
+
+/* 悬停 / 聚焦时的外框高亮 */
+.flip-card:hover .flip-face,
+.flip-card:focus-visible .flip-face { border-color: var(--amber); }
+
+.flip-card:focus-visible .flip-face {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--amber) 45%, transparent);
+}
+
+/* --- 正面 --- */
+
+/* 图片区（占满除标题外的剩余高度） */
+.cert-thumb {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.cert-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .55s var(--ease);
+}
+
+.flip-card:hover .cert-thumb img { transform: scale(1.06); }
+
+/* 左上角的奖项类别角标 */
+.flip-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  padding: 4px 11px;
+  background: rgba(11, 13, 16, .85);
+  border-left: 3px solid var(--amber);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: .5px;
+}
+
+/* 正面底部：标题 + 翻面提示 */
+.cert-info { padding: 15px 18px 4px; }
+.cert-info b { display: block; font-size: 15.5px; font-weight: 800; margin-bottom: 3px; }
+.cert-info span { font-size: 12.5px; color: var(--muted); }
+
+.flip-hint {
+  padding: 9px 18px 14px;
+  font-size: 11.5px;
+  letter-spacing: .5px;
+  color: var(--cyan);
+  border-top: 1px solid var(--line);
+  margin-top: 12px;
+  transition: color .25s var(--ease);
+}
+
+.flip-card:hover .flip-hint { color: var(--amber); }
+
+/* --- 背面 --- */
+.flip-back { padding: 0; }
+
+.flip-back-inner {
+  padding: 24px 22px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;      /* 内容超出时可滚动，避免撑破卡片 */
+}
+
+.flip-back-title { margin-bottom: 16px; }
+
+.flip-back-title small {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: var(--amber);
+  font-family: "Consolas", monospace;
+  margin-bottom: 6px;
+}
+
+.flip-back-title b {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+/* 背面要点列表 */
+.flip-facts { flex: 1 1 auto; }
+
+.flip-facts li {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-2);
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.flip-facts li:last-child { border-bottom: 0; }
+
+.flip-facts li span {
+  flex-shrink: 0;
+  width: 52px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--amber);
+  padding-top: 2px;
+  font-family: "Consolas", monospace;
+}
+
+/* 背面按钮组 */
+.flip-back-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.flip-btn {
+  flex: 1;
+  padding: 9px 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-family: inherit;
+  background: transparent;
+  border: 1px solid var(--steel);
+  color: var(--text-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .25s var(--ease);
+}
+
+.flip-btn:hover { border-color: var(--amber); color: var(--amber); }
+
+.flip-btn.primary {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: #0b0d10;
+}
+
+.flip-btn.primary:hover {
+  background: transparent;
+  color: var(--amber);
+}
+
+/* 灯箱遮罩 */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 11, .94);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 40px 20px;
+}
+
+.lightbox.open { display: flex; animation: fadeIn .25s var(--ease); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.lightbox img {
+  max-width: min(900px, 92vw);
+  max-height: 82vh;
+  object-fit: contain;
+  border: 1px solid var(--steel);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+}
+
+.lb-close {
+  position: absolute;
+  top: 24px; right: 28px;
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--panel);
+  border: 1px solid var(--steel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  transition: all .25s var(--ease);
+}
+
+.lb-close:hover { border-color: var(--amber); color: var(--amber); transform: rotate(90deg); }
+
+.lb-cap {
+  position: absolute;
+  bottom: 28px; left: 0; right: 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.lb-cap b { color: var(--amber); display: block; font-size: 16px; margin-bottom: 2px; }
+
+/* =========================================================
+   四、联系页
+   ========================================================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* 联系方式条目 */
+.ct-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+  transition: all .28s var(--ease);
+}
+
+.ct-item:hover { border-color: var(--amber); transform: translateX(4px); }
+
+.ct-icon {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--amber) 14%, transparent);
+  border: 1px solid var(--amber);
+  color: var(--amber);
+}
+
+.ct-icon svg { width: 19px; height: 19px; }
+
+.ct-body { flex: 1; min-width: 0; }
+.ct-body small { display: block; font-size: 11.5px; letter-spacing: 1.5px; color: var(--muted); }
+.ct-body b { font-size: 15.5px; font-weight: 700; word-break: break-all; }
+
+/* 复制按钮 */
+.copy-btn {
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: transparent;
+  border: 1px solid var(--steel);
+  color: var(--text-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .25s var(--ease);
+  font-family: inherit;
+}
+
+.copy-btn:hover { border-color: var(--amber); color: var(--amber); }
+.copy-btn.done { background: var(--amber); border-color: var(--amber); color: #0b0d10; }
+
+/* 二维码卡片 */
+.qr-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 26px;
+  text-align: center;
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 95% 100%, 0 100%);
+}
+
+.qr-card img {
+  width: 180px; height: 180px;
+  margin: 0 auto 14px;
+  border: 1px solid var(--line);
+  padding: 6px;
+  background: #fff;
+}
+
+.qr-card b { display: block; font-size: 15px; margin-bottom: 4px; }
+.qr-card span { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+
+/* 吐司提示 */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translate(-50%, 20px);
+  padding: 12px 24px;
+  background: var(--amber);
+  color: #0b0d10;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s var(--ease);
+}
+
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* =========================================================
+   响应式
+   ========================================================= */
+@media (max-width: 900px) {
+  .skills-wrap { grid-template-columns: 1fr; gap: 32px; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .timeline { padding-left: 30px; }
+  .timeline::before { left: 5px; }
+  .tl-item::before { left: -30.5px; width: 13px; height: 13px; }
+  .tl-date { margin-left: 0; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .flip-card { height: 400px; }
+  .flip-back-inner { padding: 20px 18px; }
+  .flip-facts li { font-size: 12.5px; }
+  .ct-item { flex-wrap: wrap; }
+  .copy-btn { margin-left: 58px; }
+}

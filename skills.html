@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>技能 · 黄振宇</title>
+<meta name="description" content="黄振宇的专业技能矩阵：AI 应用、提示词工程、演示汇报、工具开发、HTML/CSS、调研与报告撰写。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">HZY</div>
+      <div class="brand-text">
+        <b>黄振宇</b>
+        <span>NUCLEAR ENG · AI</span>
+      </div>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="experience.html">经历</a></li>
+      <li><a href="skills.html" class="active">技能</a></li>
+      <li><a href="certificates.html">证书</a></li>
+      <li><a href="contact.html">联系</a></li>
+    </ul>
+
+    <div class="nav-tools">
+      <button class="icon-btn" id="themeBtn" title="切换主题" aria-label="切换主题"></button>
+      <button class="icon-btn hamburger" id="menuBtn" title="菜单" aria-label="打开菜单"></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ 雷达图 + 技能矩阵 ============ -->
+<section class="section" style="padding-top:calc(var(--nav-h) + 64px)">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-num">SKILLS / 技能</div>
+      <h2>六维能力雷达</h2>
+      <p>数值是自评，但每一项背后都有对应的实战成果支撑 —— 雷达图由原生 SVG 绘制，无第三方图表库依赖。</p>
+    </div>
+
+    <div class="skills-wrap">
+      <!-- 雷达图（由 JS 动态生成） -->
+      <div class="radar-box reveal">
+        <svg id="radar" viewBox="0 0 400 400" role="img" aria-label="专业技能雷达图"></svg>
+      </div>
+
+      <!-- 技能进度条 -->
+      <div class="reveal" id="skillBars">
+
+        <div class="skill-item">
+          <div class="skill-top"><b>AI 内容生成 / 数据分析</b><span>85</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="85"></div></div>
+          <div class="skill-desc">熟练使用主流 AI 工具完成内容生产与数据处理，已获达摩院人工智能训练师初、高级奖章</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-top"><b>提示词工程 / AI 建站</b><span>80</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="80"></div></div>
+          <div class="skill-desc">能把模糊需求拆成可执行的提示词链路，本简历网站即为 AI 协作开发的实践案例</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-top"><b>演示汇报 / 路演答辩</b><span>88</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="88"></div></div>
+          <div class="skill-desc">PPT 高级排版与公开表达，省级答辩、校级评比、3 场红色主题分享会累计覆盖 200+ 人</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-top"><b>工具开发 / 低代码建站</b><span>82</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="82"></div></div>
+          <div class="skill-desc">Office 套件深度使用，独立完成过网页搭建与部署上线（GitHub Pages / Netlify）</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-top"><b>调研与报告撰写</b><span>85</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="85"></div></div>
+          <div class="skill-desc">问卷设计、田野访谈、万字报告全流程独立操盘，成果被社区文化站采纳</div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-top"><b>HTML / CSS 前端基础</b><span>60</span></div>
+          <div class="skill-track"><div class="skill-fill" data-w="60"></div></div>
+          <div class="skill-desc">处于持续学习阶段 —— 这个网站从布局、响应式到交互动画均为手写实现</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 工具箱 ============ -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-num">TOOLBOX / 工具箱</div>
+      <h2>常用的家伙什儿</h2>
+    </div>
+
+    <div class="grid-3">
+      <div class="card reveal">
+        <h3 style="margin-bottom:14px">AI 与生产力</h3>
+        <div class="tool-cloud">
+          <span class="tool">ChatGPT / DeepSeek</span>
+          <span class="tool">Kimi</span>
+          <span class="tool">提示词工程</span>
+          <span class="tool">AI 建站</span>
+          <span class="tool">AI 数据分析</span>
+          <span class="tool">AI 内容生成</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="margin-bottom:14px">办公与表达</h3>
+        <div class="tool-cloud">
+          <span class="tool">PowerPoint 高级排版</span>
+          <span class="tool">Word 长文档</span>
+          <span class="tool">Excel 数据处理</span>
+          <span class="tool">问卷设计</span>
+          <span class="tool">路演答辩</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="margin-bottom:14px">技术与工程</h3>
+        <div class="tool-cloud">
+          <span class="tool">HTML / CSS</span>
+          <span class="tool">JavaScript 基础</span>
+          <span class="tool">Git / GitHub</span>
+          <span class="tool">GitHub Pages</span>
+          <span class="tool">Netlify 部署</span>
+          <span class="tool">结构设计与原型制作</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 学习中的方向 ============ -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="card reveal" style="border-left:4px solid var(--amber)">
+      <div class="sec-num">IN PROGRESS / 正在啃</div>
+      <h3 style="font-size:20px;margin-bottom:10px">下一步要补的能力</h3>
+      <p style="margin-bottom:14px">
+        核工程专业课（核物理、反应堆工程、工程热力学、辐射防护）正在系统推进中。
+        我给自己定的方向是<strong style="color:var(--amber)">「AI + 核工程」的交叉应用</strong>：
+      </p>
+      <ul class="tl-list">
+        <li>用 AI 辅助实验数据处理与技术文档生成，把重复劳动交给工具</li>
+        <li>补齐前端与编程基础，把想法做成真正能跑起来的东西</li>
+        <li>继续打磨公开表达，把专业内容讲得让外行也听得懂</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 黄振宇 · 在线简历网站 · 南华大学核工程与核技术</span>
+    <span class="tip">Built with HTML / CSS / JavaScript</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/pages.js"></script>
+</body>
+</html>
