@@ -1,6 +1,7 @@
 /* =============================================================
    黄振宇 · 个人简历网站 —— 全局交互脚本
-   功能：主题切换 / 移动端菜单 / 滚动进场动画 / 数字滚动 / 导航高亮
+   功能：移动端菜单 / 滚动进场动画 / 数字滚动 / 导航高亮 / 滚动视差
+   说明：本站为深色星空单一主题，主题切换已移除。
    ============================================================= */
 
 (function () {
@@ -8,8 +9,6 @@
 
   /* ---------- 图标定义（内联 SVG，避免外链依赖） ---------- */
   const ICONS = {
-    sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M1.5 12H4M20 12h2.5M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>',
-    moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
     menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>'
   };
@@ -17,32 +16,7 @@
   const doc = document;
 
   /* =========================================================
-     1. 主题切换（深色 ⇄ 工业蓝图浅色），状态存 localStorage
-     ========================================================= */
-  const THEME_KEY = 'hzy-resume-theme';
-  const themeBtn = doc.getElementById('themeBtn');
-
-  function applyTheme(theme) {
-    doc.documentElement.setAttribute('data-theme', theme);
-    if (themeBtn) {
-      themeBtn.innerHTML = theme === 'dark' ? ICONS.sun : ICONS.moon;
-      themeBtn.title = theme === 'dark' ? '切换到浅色模式' : '切换到深色模式';
-    }
-  }
-
-  const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
-  applyTheme(savedTheme);
-
-  if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
-      const next = doc.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-      localStorage.setItem(THEME_KEY, next);
-    });
-  }
-
-  /* =========================================================
-     2. 移动端汉堡菜单
+     1. 移动端汉堡菜单
      ========================================================= */
   const menuBtn = doc.getElementById('menuBtn');
   const navLinks = doc.getElementById('navLinks');
@@ -65,7 +39,7 @@
   }
 
   /* =========================================================
-     3. 滚动进场动画（IntersectionObserver）
+     2. 滚动进场动画（IntersectionObserver）
      ========================================================= */
   const revealEls = doc.querySelectorAll('.reveal');
 
@@ -86,7 +60,7 @@
   }
 
   /* =========================================================
-     4. 数字滚动动画（数据仪表盘）
+     3. 数字滚动动画（数据仪表盘）
         用法：<div class="stat-num" data-count="40" data-suffix="%">0<span>%</span></div>
      ========================================================= */
   function animateCount(el) {
@@ -124,7 +98,7 @@
   }
 
   /* =========================================================
-     5. 导航滚动高亮（滚动时给顶栏加边框加深效果）
+     4. 导航滚动高亮（滚动时给顶栏加边框加深效果）
      ========================================================= */
   const nav = doc.querySelector('.nav');
 
@@ -146,7 +120,7 @@
   }
 
   /* =========================================================
-     6. 滚动视差（仅首页生效）
+     5. 滚动视差（仅首页生效）
      原理：JS 只负责把滚动量写进 CSS 变量 --py / --sy，
            具体位移由 CSS 用 calc() 乘以不同系数完成，
            各层系数不同 → 移动速度不同 → 产生纵深感

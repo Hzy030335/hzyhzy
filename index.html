@@ -6,8 +6,36 @@
 <title>黄振宇 · 核工底色 · AI 工具 · 工程实践</title>
 <meta name="description" content="黄振宇的个人在线简历 —— 南华大学核工程与核技术专业本科生，AI 应用开发、科创项目、社会调研与志愿服务经历。">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/home.css">
+<link rel="stylesheet" href="assets/css/gate.css">
 </head>
-<body>
+<body class="gate-open">
+
+<!-- ============ 星球引导页（仅首页，一次会话播放一次） ============ -->
+<div id="planetGate" role="dialog" aria-label="欢迎来到我的星球">
+  <div class="gate-inner">
+    <div class="gate-planet">
+      <div class="gate-ring r1"></div>
+      <div class="gate-ring r2"></div>
+      <div class="gate-planet-core"></div>
+    </div>
+
+    <h2 class="gate-title">欢迎来到我的星球</h2>
+    <p class="gate-sub">黄振宇 · 核工底色 · AI 工具 · 工程实践</p>
+    <p class="gate-meta">NANHUA UNIV · NUCLEAR ENG · 2026</p>
+
+    <div class="gate-status">
+      <div class="gate-bar"><span></span></div>
+      <div class="gate-status-text" id="gateStatus">一颗星球正在醒来…</div>
+    </div>
+
+    <button class="gate-enter" id="gateEnter" type="button">
+      进入我的星球 <span class="arrow">→</span>
+    </button>
+  </div>
+
+  <div class="gate-foot">南华大学 · 核工程与核技术（创新班）</div>
+</div>
 
 <!-- ============ 顶部导航 ============ -->
 <nav class="nav">
@@ -29,48 +57,52 @@
     </ul>
 
     <div class="nav-tools">
-      <button class="icon-btn" id="themeBtn" title="切换主题" aria-label="切换主题"></button>
       <button class="icon-btn hamburger" id="menuBtn" title="菜单" aria-label="打开菜单"></button>
     </div>
   </div>
 </nav>
 
-<!-- ============ 首屏 Hero ============ -->
-<header class="hero">
+<!-- ============ 首屏：太空档案式 Hero ============ -->
+<header class="hero s-hero">
+  <!-- 星点漂移层（纯 CSS，两层不同速度） -->
+  <div class="star-drift sd-1" aria-hidden="true"></div>
+  <div class="star-drift sd-2" aria-hidden="true"></div>
+
   <div class="container">
-    <div class="hero-grid">
+    <div class="s-grid">
 
-      <!-- 左：机械风真人头像 -->
+      <!-- 左：太空档案卡 -->
       <div class="reveal">
-        <div class="mech-avatar">
-          <img src="assets/img/avatar.jpg" alt="黄振宇个人照片">
-          <div class="tint"></div>
-          <div class="scan"></div>
-          <div class="scanbar"></div>
-          <div class="corner tl"></div>
-          <div class="corner tr"></div>
-          <div class="corner bl"></div>
-          <div class="corner br"></div>
-          <div class="status"><i></i>ONLINE</div>
-          <div class="plate">
-            ID: <b>HZY-2026</b> / UNIV: <b>USC</b><br>
-            MAJOR: <b>NUCLEAR ENG</b>
-          </div>
-        </div>
+        <div class="dossier">
+          <!-- 轨道装饰：外圈缓慢旋转，内圈反向 -->
+          <div class="orbit orbit-1" aria-hidden="true"><i class="sat"></i></div>
+          <div class="orbit orbit-2" aria-hidden="true"><i class="sat sat-cyan"></i></div>
 
-        <div class="rivet-bar">
-          <span>SPEC: REACTOR / AI / RESEARCH</span>
-          <span class="rivets"><i></i><i></i><i></i><i></i></span>
+          <div class="dossier-frame">
+            <img src="assets/img/avatar.jpg" alt="黄振宇个人照片">
+            <div class="dossier-tint"></div>
+
+            <div class="dossier-label">STUDENT<br>DOSSIER<br><span>/ 2026</span></div>
+            <div class="dossier-status"><i></i>ONLINE</div>
+            <div class="dossier-note">ENGINEER<br>FOR A<br>BETTER<br>TOMORROW</div>
+
+            <div class="dossier-plate">
+              ID: <b>HZY-2026</b><br>
+              MAJOR: <b>NUCLEAR ENG</b>
+            </div>
+          </div>
+
+          <div class="dossier-caption">以工程连接更大的世界</div>
         </div>
       </div>
 
-      <!-- 右：个人介绍 -->
-      <div class="reveal">
-        <div class="hero-tag"><span class="dot"></span>RST 竞赛训练营 · 入营作品 · 2026</div>
+      <!-- 右：个人定位 -->
+      <div class="reveal s-intro">
+        <div class="hero-tag"><span class="dot"></span>2026 级本科生 · 工程探索中</div>
 
         <h1>黄振宇<span class="accent">.</span></h1>
 
-        <p class="hero-sub">核工底色 · AI 工具 · 工程实践</p>
+        <p class="hero-sub s-sub">核工底色 · AI 工具 · 工程实践</p>
 
         <p class="hero-desc">
           南华大学核工程与核技术专业 2026 级本科生。从未来太空车的 3 轮结构迭代，
@@ -94,40 +126,55 @@
       </div>
     </div>
 
-    <!-- ============ 数据仪表盘 ============ -->
-    <div class="stats reveal">
-      <div class="stat">
-        <div class="stat-num" data-count="40" data-suffix="%">0<span>%</span></div>
-        <div class="stat-label">越障性能提升</div>
-        <div class="stat-sub">太空车 3 轮迭代 · 10cm → 14cm</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="150" data-suffix="+">0<span>+</span></div>
-        <div class="stat-label">有效调研问卷</div>
-        <div class="stat-sub">覆盖 3 个年龄段 · 10+ 位传承人访谈</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="40" data-suffix="+">0<span>+</span></div>
-        <div class="stat-label">场主题团日活动</div>
-        <div class="stat-sub">平均参与率 95% · 材料通过率 +30%</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num" data-count="30" data-suffix="h+">0<span>h+</span></div>
-        <div class="stat-label">志愿服务时长</div>
-        <div class="stat-sub">事迹收录全国优秀志愿者铭记系列</div>
-      </div>
-    </div>
+    <!-- 右侧竖排装饰字 -->
+    <div class="side-word" aria-hidden="true">NUCLEAR × AI × ENGINEERING</div>
   </div>
 
-  <!-- 视差装饰：底部齿轮导轨，随滚动横向平移 -->
   <div class="hero-rail" aria-hidden="true"></div>
 </header>
 
-<!-- ============ 能力方向 ============ -->
-<section class="section">
+<!-- ============ 代表性实践（替代原数字成果区） ============ -->
+<section class="section s-missions">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="sec-num">01 / CAPABILITY</div>
+      <div class="sec-num">01 / MISSION ARCHIVE</div>
+      <h2>代表性实践</h2>
+      <p>三段代表性的实践档案——每一段都从想法出发，落在可验证的成果上。</p>
+    </div>
+
+    <div class="mission-grid">
+      <a href="experience.html" class="mission-card reveal">
+        <div class="mission-no">01</div>
+        <h3>未来太空车</h3>
+        <p class="mission-title">越障结构设计与迭代</p>
+        <p class="mission-desc">从结构布局、动力选型到三轮测试闭环，完整走通一遍工程流程。</p>
+        <div class="mission-foot">3 轮迭代 · 越障高度 10cm → 14cm</div>
+      </a>
+
+      <a href="experience.html" class="mission-card reveal">
+        <div class="mission-no">02</div>
+        <h3>「年俗年味有传承」</h3>
+        <p class="mission-title">非遗传承现状调研</p>
+        <p class="mission-desc">问卷设计、田野访谈、成体系报告撰写，成果被社区文化站参考采纳。</p>
+        <div class="mission-foot">150+ 有效问卷 · 10+ 位传承人访谈</div>
+      </a>
+
+      <a href="experience.html" class="mission-card reveal">
+        <div class="mission-no">03</div>
+        <h3>红色文化学习</h3>
+        <p class="mission-title">志愿服务与主题团日</p>
+        <p class="mission-desc">组织红色主题分享会与团日活动，志愿服务事迹获收录表彰。</p>
+        <div class="mission-foot">30h+ 志愿时长 · 40+ 场主题活动</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 能力方向 ============ -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-num">02 / CAPABILITY</div>
       <h2>三条能力主线</h2>
       <p>不追求样样精通，但每条线都有拿得出手的实战成果与可验证的数据。</p>
     </div>
@@ -170,7 +217,7 @@
 <section class="section" style="padding-top:0">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="sec-num">02 / NAVIGATION</div>
+      <div class="sec-num">03 / NAVIGATION</div>
       <h2>继续往下看</h2>
     </div>
 
@@ -208,6 +255,8 @@
   </div>
 </footer>
 
+<script src="assets/js/starfield.js"></script>
+<script src="assets/js/gate.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,332 @@
+/* =============================================================
+   首页专属样式 —— 太空档案式改版
+   依赖：style.css（沿用其设计令牌与通用组件）
+   内容：星点漂移 / 轨道旋转 / 档案卡 / 代表性实践卡片
+   ============================================================= */
+
+/* ---------- 1. 星点漂移层 ---------- */
+/* 两层不同大小的星点，以不同速度横向漂移，营造太空纵深 */
+.s-hero .star-drift {
+  position: absolute;
+  inset: -60% 0;
+  pointer-events: none;
+  background-repeat: repeat;
+}
+
+.s-hero .sd-1 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 30%, rgba(255, 248, 220, .5), transparent),
+    radial-gradient(1px 1px at 46% 62%, rgba(255, 248, 220, .38), transparent),
+    radial-gradient(1.5px 1.5px at 74% 22%, rgba(143, 184, 232, .45), transparent),
+    radial-gradient(1px 1px at 88% 76%, rgba(255, 248, 220, .32), transparent);
+  background-size: 520px 420px;
+  animation: starDrift 90s linear infinite;
+}
+
+.s-hero .sd-2 {
+  background-image:
+    radial-gradient(1px 1px at 22% 68%, rgba(143, 184, 232, .4), transparent),
+    radial-gradient(1.5px 1.5px at 58% 14%, rgba(255, 248, 220, .42), transparent),
+    radial-gradient(1px 1px at 82% 46%, rgba(232, 163, 174, .32), transparent);
+  background-size: 340px 300px;
+  animation: starDrift 55s linear infinite reverse;
+  opacity: .8;
+}
+
+@keyframes starDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-520px, 0, 0); }
+}
+
+/* ---------- 2. 首屏左右分栏 ---------- */
+.s-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* 右侧副标题下的金色短横线（呼应参考图） */
+.s-sub { position: relative; padding-bottom: 14px; }
+
+.s-sub::after {
+  content: "";
+  position: absolute;
+  left: 2px; bottom: 0;
+  width: 120px; height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--amber), rgba(232, 203, 121, 0));
+  box-shadow: 0 0 12px rgba(232, 203, 121, .5);
+}
+
+/* 右侧竖排装饰字（桌面端显示） */
+.side-word {
+  position: absolute;
+  right: -8px; top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  opacity: .55;
+  pointer-events: none;
+}
+
+/* ---------- 3. 太空档案卡 ---------- */
+.dossier {
+  position: relative;
+  padding: 26px;
+}
+
+/* 档案卡外侧的双层轨道：缓慢旋转 */
+.dossier .orbit {
+  position: absolute;
+  border: 1px dashed rgba(232, 203, 121, .3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.dossier .orbit-1 {
+  inset: 0;
+  animation: orbitSpin 46s linear infinite;
+}
+
+.dossier .orbit-2 {
+  inset: -18px;
+  border-color: rgba(143, 184, 232, .22);
+  animation: orbitSpin 70s linear infinite reverse;
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 轨道上的"卫星"光点 */
+.dossier .orbit .sat {
+  position: absolute;
+  top: -4px; left: 50%;
+  width: 8px; height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px rgba(232, 203, 121, .9);
+}
+
+.dossier .orbit .sat-cyan {
+  background: var(--cyan);
+  box-shadow: 0 0 12px rgba(143, 184, 232, .9);
+}
+
+/* 档案卡本体 */
+.dossier-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(232, 203, 121, .32);
+  background: var(--panel);
+  box-shadow: var(--shadow), 0 0 0 1px rgba(143, 184, 232, .08);
+}
+
+.dossier-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(.92) contrast(1.04) brightness(1.02);
+  transition: transform .8s var(--ease), filter .6s var(--ease);
+}
+
+.dossier-frame:hover img {
+  transform: scale(1.035);
+  filter: saturate(1.02) contrast(1.06) brightness(1.05);
+}
+
+/* 顶部冷蓝到深空的着色层（太空档案氛围） */
+.dossier-tint {
+  position: absolute; inset: 0;
+  background: linear-gradient(165deg, rgba(143, 184, 232, .18), transparent 46%),
+              linear-gradient(0deg, rgba(7, 11, 28, .82), transparent 56%);
+  pointer-events: none;
+}
+
+/* 左上角：档案编号 */
+.dossier-label {
+  position: absolute;
+  top: 14px; left: 16px;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  line-height: 1.5;
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  text-shadow: 0 1px 6px rgba(7, 11, 28, .8);
+}
+
+.dossier-label span { color: var(--amber); }
+
+/* 右上角：在线状态 */
+.dossier-status {
+  position: absolute;
+  top: 14px; right: 14px;
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 11px;
+  background: rgba(7, 11, 28, .72);
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  backdrop-filter: blur(6px);
+}
+
+.dossier-status i {
+  width: 7px; height: 7px;
+  background: #7fe0a8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #7fe0a8;
+  animation: pulse 1.8s infinite;
+}
+
+/* 右下角：格言竖排小字 */
+.dossier-note {
+  position: absolute;
+  right: 16px; bottom: 64px;
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  line-height: 1.7;
+  color: rgba(255, 248, 220, .72);
+  font-family: var(--font-mono);
+  text-align: right;
+  pointer-events: none;
+}
+
+/* 左下角：ID 铭牌 */
+.dossier-plate {
+  position: absolute;
+  left: 14px; bottom: 16px;
+  padding: 6px 13px;
+  background: rgba(7, 11, 28, .8);
+  border-left: 2px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  font-size: 10.5px;
+  letter-spacing: 1.4px;
+  line-height: 1.7;
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  backdrop-filter: blur(6px);
+}
+
+.dossier-plate b { color: var(--amber); }
+
+/* 卡片下方的一句话 */
+.dossier-caption {
+  margin-top: 14px;
+  padding-left: 14px;
+  border-left: 2px solid var(--amber);
+  font-size: 12.5px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* ---------- 4. 代表性实践卡片 ---------- */
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.mission-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 24px 22px;
+  background: color-mix(in srgb, var(--panel) 58%, transparent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: all .3s var(--ease);
+}
+
+/* 顶部星光条：悬停时点亮 */
+.mission-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .45s var(--ease);
+}
+
+.mission-card:hover {
+  border-color: rgba(232, 203, 121, .4);
+  background: color-mix(in srgb, var(--panel-2) 74%, transparent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow), var(--glow);
+}
+
+.mission-card:hover::before { transform: scaleX(1); }
+
+.mission-no {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--amber);
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+
+.mission-card h3 {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.2px;
+}
+
+.mission-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cyan);
+  margin: 4px 0 10px;
+}
+
+.mission-desc {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.7;
+  flex: 1 1 auto;
+}
+
+.mission-foot {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  transition: color .3s var(--ease);
+}
+
+.mission-card:hover .mission-foot { color: var(--amber); }
+
+/* ---------- 5. 响应式适配 ---------- */
+@media (max-width: 980px) {
+  .s-grid { grid-template-columns: 1fr; gap: 44px; }
+  .dossier { max-width: 340px; margin: 0 auto; }
+  .side-word { display: none; }
+  .mission-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .dossier { padding: 18px; }
+  .dossier .orbit-2 { inset: -12px; }
+  .dossier-note { display: none; }
+  .mission-card { padding: 22px 18px 18px; }
+}
+
+/* ---------- 6. 减少动效 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .s-hero .star-drift,
+  .dossier .orbit { animation: none !important; }
+  .dossier .orbit .sat { opacity: .6; }
+}

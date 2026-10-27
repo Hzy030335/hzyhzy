@@ -33,7 +33,7 @@
 .filter-btn.active {
   background: var(--amber);
   border-color: var(--amber);
-  color: #0b0d10;
+  color: var(--ink);
 }
 
 /* 时间轴容器 */
@@ -255,24 +255,6 @@
 
 .skill-desc { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
-/* 工具箱标签云 */
-.tool-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
-
-.tool {
-  padding: 7px 14px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  font-size: 13px;
-  color: var(--text-2);
-  transition: all .25s var(--ease);
-}
-
-.tool:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  transform: translateY(-2px);
-}
-
 /* =========================================================
    三、证书页 —— 3D 翻转卡片
    正面：证书原图 + 标题
@@ -454,7 +436,7 @@
 .flip-btn.primary {
   background: var(--amber);
   border-color: var(--amber);
-  color: #0b0d10;
+  color: var(--ink);
 }
 
 .flip-btn.primary:hover {
@@ -569,7 +551,7 @@
 }
 
 .copy-btn:hover { border-color: var(--amber); color: var(--amber); }
-.copy-btn.done { background: var(--amber); border-color: var(--amber); color: #0b0d10; }
+.copy-btn.done { background: var(--amber); border-color: var(--amber); color: var(--ink); }
 
 /* 二维码卡片 */
 .qr-card {
@@ -581,7 +563,11 @@
 }
 
 .qr-card img {
-  width: 180px; height: 180px;
+  /* 微信二维码为竖版原图：按原始比例展示，不再强制裁成方形 */
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 210px;
   margin: 0 auto 14px;
   border: 1px solid var(--line);
   padding: 6px;
@@ -599,7 +585,7 @@
   transform: translate(-50%, 20px);
   padding: 12px 24px;
   background: var(--amber);
-  color: #0b0d10;
+  color: var(--ink);
   font-size: 14px;
   font-weight: 700;
   z-index: 3000;
